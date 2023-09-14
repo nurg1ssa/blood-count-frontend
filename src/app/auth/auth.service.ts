@@ -83,8 +83,8 @@ export class AuthService {
   }
 
   logout() {
-    this.removeAccess();
     this.router.navigate(['/login']);
+    this.removeAccess();
     sessionStorage.setItem('anemia-type', '');
     sessionStorage.setItem('diagnosis', '');
     sessionStorage.removeItem('first-min');

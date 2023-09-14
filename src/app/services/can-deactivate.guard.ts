@@ -15,7 +15,7 @@ export interface CanComponentDeactivate {
 export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
   constructor(
     private sharedGameSubmittedService: SharedGameSubmittedService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   canDeactivate(component: CanComponentDeactivate): boolean | Observable<boolean> {
@@ -24,9 +24,8 @@ export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate>
       take(1), // Ensure we only take one value and unsubscribe
       switchMap((submitted: string) => {
         if (submitted !== 'IN_PROGRESS') {
-          return of(true); // Game is not in progress, allow deactivation
+          return of(true); 
         }
-
         // Game is in progress, open the dialog
         return this.openDialog().pipe(
           map((result: boolean) => {
