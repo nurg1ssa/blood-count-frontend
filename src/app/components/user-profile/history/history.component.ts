@@ -71,10 +71,14 @@ export class HistoryComponent implements OnInit {
     this.userService.getHistory(this.userID).subscribe(
       (data) => {
         this.gameHistory = this.sortByDateField(data, 'endTime').reverse()
-        console.log(this.gameHistory)
         this.isLoading = false
       }
     )
+  }
+  calculateIndex(displayedIndex: number): number {
+    const startIndex = (this.currentPage - 1) * this.gamesPerPage;
+    const gameIndex = this.gameHistory.length - startIndex - displayedIndex; 
+    return gameIndex;
   }
 
   get displayedGames(): ISimpleGameResponse[] {
@@ -87,7 +91,6 @@ export class HistoryComponent implements OnInit {
     this.userService.getCompletedGameById(this.userID, item).subscribe(
       (data) => {
         this.caseInfo = data
-        console.log(data)
       }
     )
     this.openedPopup = true

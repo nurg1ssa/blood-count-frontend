@@ -151,9 +151,11 @@ export class GroupsManageComponent implements OnInit {
   }
 
   openPopup(item) {
+    this.isLoading = true
     this.adminService.fetchGroupParticipants(item).subscribe(
       (data) => {
         this.groupParticipants = data
+        this.isLoading = false
       }
     )
     this.openedPopup = true
@@ -165,7 +167,6 @@ export class GroupsManageComponent implements OnInit {
   }
 
   deleteGroup(group) {
-    console.log(group)
     this.groupService.deleteGroup(group.groupNumber).subscribe(
       () => {
         this.notifier.notify('success', 'Group has been deleted');
@@ -205,9 +206,11 @@ export class GroupsManageComponent implements OnInit {
   }
 
   openPopup2(id, email) {
+    this.isLoading = true
     this.adminService.getCompletedGames(id).subscribe(
       (data) => {
         this.userHistory = data
+        this.isLoading = false
       }
     )
     this.openedPopup2 = true
@@ -219,11 +222,10 @@ export class GroupsManageComponent implements OnInit {
   }
 
 
-  openPopup3(id,email) {
+  openPopup3(id, email) {
     this.openedPopup3 = true
     this.currentUserEmail = email
     this.currentUserID = id
-    console.log(this.currentUserID)
   }
 
   closePopup3() {
@@ -239,9 +241,9 @@ export class GroupsManageComponent implements OnInit {
     this.onClick = false;
   }
 
-  onSubmit(){
+  onSubmit() {
     this.adminService.changeUserGroup(this.currentUserID, this.selectedOption).subscribe(
-      ()=>{
+      () => {
         this.notifier.notify('success', 'User assigned to the selected group');
         this.closePopup3()
         this.openPopup(this.currentGroup)
@@ -251,7 +253,7 @@ export class GroupsManageComponent implements OnInit {
         this.notifier.notify('error', error.message);
       }
     )
- 
+
   }
 
   get visiblePages(): number[] {

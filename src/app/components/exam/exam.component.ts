@@ -47,6 +47,7 @@ export class ExamComponent implements OnInit, CanComponentDeactivate {
   gameCaseDetails: IGameCaseDetailsResponse
   percentScore: number
   noTimer: boolean
+  isGameLoading: boolean = true;
   private readonly notifier: NotifierService;
 
 
@@ -83,6 +84,7 @@ export class ExamComponent implements OnInit, CanComponentDeactivate {
   }
 
   ngOnInit() {
+    this.isGameLoading = true;
     this.sharedUserService.getUserDetails().subscribe(userDetails => {
       this.userDetails = userDetails;
     });
@@ -107,6 +109,7 @@ export class ExamComponent implements OnInit, CanComponentDeactivate {
           this.gameId = this.gameData.id;
           this.msAssesmentTest = this.sortMsArrayById(msQuestions);
           this.gameCaseDetails = data.gameCaseDetails
+          this.isGameLoading = false;;
         },
       );
   }
@@ -200,11 +203,9 @@ export class ExamComponent implements OnInit, CanComponentDeactivate {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         isClose = true
-        console.log(isClose)
         return isClose;
       } else {
         isClose = false
-        console.log(isClose)
         return isClose;
       }
     });

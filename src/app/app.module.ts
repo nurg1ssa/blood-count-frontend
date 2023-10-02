@@ -21,7 +21,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { HistoryComponent } from './components/user-profile/history/history.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { WhiteBoxComponent } from './components/white-box/white-box.component';
+import { WhiteBoxComponent } from './components/reusable-components/white-box.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { PanelButtonComponent } from './components/header/panel-button/panel-button.component';
 import { CbcTableComponent } from './components/cbc-table/cbc-table.component';
@@ -52,7 +52,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogComponent } from './components/dialog/dialog.component';
-
+import { LoadingComponent } from './components/reusable-components/loading.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -92,6 +92,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ForgotPasswordComponent,
     ResetPasswordComponent,
     DialogComponent,
+    LoadingComponent,
   ],
   imports: [
     ReactiveFormsModule,
